@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Bookings - Starlight</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
+      margin: 0;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #3a3a72, #d76d77, #ffaf7b);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    .booking-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    .booking-table th, .booking-table td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    .booking-table th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .booking-table td button {
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .approve-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .decline-btn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .edit-btn {
+      background-color: #ff9800;
+      color: white;
+    }
+
+    .delete-btn {
+      background-color: #e64949;
+      color: white;
+    }
+
+    .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 8px; /* Reduced from 15px */
+  background-color: #eee;
+  color: #555;
+  border-top: 1px solid #ddd;
+  font-size: 14px; /* Optional: reduce text size too */
+}
+    .add-booking-form {
+      margin-bottom: 20px;
+    }
+
+    .add-booking-form input, .add-booking-form select, .add-booking-form button {
+      padding: 8px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Manage Event Bookings</h1>
+  </div>
+
+  <div class="container">
+    <!-- Add New Booking Form -->
+    <div class="add-booking-form">
+      <h2>Add New Booking</h2>
+      <input type="text" id="client-name" placeholder="Client Name" required />
+      <input type="date" id="event-date" required />
+
+      <!-- Venue Dropdown -->
+      <select id="venue" required>
+        <option value="">Select Venue</option>
+        <option value="The Deltin, Daman">The Deltin, Daman</option>
+        <option value="Azaya Beach Resort - Goa">Azaya Beach Resort - Goa</option>
+        <option value="Grand Banquet, Chembur">Grand Banquet, Chembur</option>
+        <option value="Prince Palace Hotel, Thailand">Prince Palace Hotel, Thailand</option>
+        <option value="The Udaipur Palace, Udaipur">The Udaipur Palace, Udaipur</option>
+        <option value="The Raj Palace, Jaipur">The Raj Palace, Jaipur</option>
+      </select>
+
+      <!-- Event Type Dropdown -->
+      <select id="event-type" required>
+        <option value="">Select Event Type</option>
+        <option value="Wedding">Wedding</option>
+        <option value="Corporate Event">Corporate Event</option>
+        <option value="Birthday Party">Birthday Party</option>
+        <option value="Anniversary">Anniversary</option>
+        <option value="Concert">Concert</option>
+        <option value="Private Party">Private Party</option>
+      </select>
+
+      <select id="status" required>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Declined">Declined</option>
+      </select>
+      <button onclick="addBooking()">Add Booking</button>
+    </div>
+
+    <!-- Search Bar -->
+    <input type="text" id="search-booking" placeholder="Search by client name..." onkeyup="searchBooking()" style="margin-bottom: 20px; padding: 8px; width: 100%;">
+
+    <!-- Booking Table -->
+    <h2>All Bookings</h2>
+    <table class="booking-table">
+      <thead>
+        <tr>
+          <th>Client Name</th>
+          <th>Event Date</th>
+          <th>Venue</th>
+          <th>Event Type</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="booking-list">
+        <!-- Dynamically added rows will appear here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Starlight Event Management. All rights reserved.
+  </div>
+
+  <script>
+    // Function to load data from localStorage
+    function loadBookings() {
+      let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      bookings.forEach(booking => {
+        addBookingToTable(booking);
+      });
+    }
+
+    // Function to add a new booking
+    function addBooking() {
+      let clientName = document.getElementById('client-name').value;
+      let eventDate = document.getElementById('event-date').value;
+      let venue = document.getElementById('venue').value;
+      let eventType = document.getElementById('event-type').value;
+      let status = document.getElementById('status').value;
+
+      if (clientName && eventDate && venue && eventType) {
+        let newBooking = {
+          clientName,
+          eventDate,
+          venue,
+          eventType,
+          status
+        };
+
+        // Save the booking to localStorage
+        let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        bookings.push(newBooking);
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+
+        // Add the new booking to the table
+        addBookingToTable(newBooking);
+
+        // Reset form fields
+        document.getElementById('client-name').value = '';
+        document.getElementById('event-date').value = '';
+        document.getElementById('venue').value = '';
+        document.getElementById('event-type').value = '';
+        document.getElementById('status').value = 'Pending';
+      } else {
+        alert("Please fill in all the details.");
+      }
+    }
+
+    // Function to add booking to the table
+    function addBookingToTable(booking) {
+      let table = document.getElementById('booking-list');
+      let row = table.insertRow();
+
+      row.innerHTML = `
+        <td>${booking.clientName}</td>
+        <td>${booking.eventDate}</td>
+        <td>${booking.venue}</td>
+        <td>${booking.eventType}</td>
+        <td><span style="color:${booking.status === 'Approved' ? 'green' : booking.status === 'Declined' ? 'red' : 'orange'};">${booking.status}</span></td>
+        <td>
+          <button class="approve-btn" onclick="approveBooking(this)">Approve</button>
+          <button class="decline-btn" onclick="declineBooking(this)">Decline</button>
+          <button class="edit-btn" onclick="editBooking(this)">Edit</button>
+          <button class="delete-btn" onclick="deleteBooking(this)">Delete</button>
+        </td>
+      `;
+    }
+
+    // Function to approve booking
+    function approveBooking(button) {
+      let row = button.parentElement.parentElement;
+      row.cells[4].innerHTML = '<span style="color:green;">Approved</span>';
+
+      // Update status in localStorage
+      updateBookingStatus(row, 'Approved');
+    }
+
+    // Function to decline booking
+    function declineBooking(button) {
+      let row = button.parentElement.parentElement;
+      row.cells[4].innerHTML = '<span style="color:red;">Declined</span>';
+
+      // Update status in localStorage
+      updateBookingStatus(row, 'Declined');
+    }
+
+    // Function to update booking status in localStorage
+    function updateBookingStatus(row, status) {
+      let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      let clientName = row.cells[0].innerText;
+      let eventDate = row.cells[1].innerText;
+
+      // Find the booking and update the status
+      let booking = bookings.find(b => b.clientName === clientName && b.eventDate === eventDate);
+      if (booking) {
+        booking.status = status;
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+      }
+    }
+
+    // Function to edit booking
+    function editBooking(button) {
+      let row = button.parentElement.parentElement;
+      let clientName = row.cells[0].innerText;
+      let eventDate = row.cells[1].innerText;
+      let venue = row.cells[2].innerText;
+      let eventType = row.cells[3].innerText;
+      let status = row.cells[4].innerText;
+
+      document.getElementById('client-name').value = clientName;
+      document.getElementById('event-date').value = eventDate;
+      document.getElementById('venue').value = venue;
+      document.getElementById('event-type').value = eventType;
+      document.getElementById('status').value = status === 'Approved' ? 'Approved' : status === 'Declined' ? 'Declined' : 'Pending';
+
+      // Remove the booking
+      deleteBooking(button);
+    }
+
+    // Function to delete booking
+    function deleteBooking(button) {
+      let row = button.parentElement.parentElement;
+      let clientName = row.cells[0].innerText;
+      let eventDate = row.cells[1].innerText;
+
+      // Remove the booking from localStorage
+      let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      bookings = bookings.filter(b => b.clientName !== clientName || b.eventDate !== eventDate);
+      localStorage.setItem('bookings', JSON.stringify(bookings));
+
+      // Remove the row from the table
+      row.remove();
+    }
+
+    // Function to search bookings
+    function searchBooking() {
+      let searchValue = document.getElementById('search-booking').value.toLowerCase();
+      let rows = document.getElementById('booking-list').getElementsByTagName('tr');
+
+      for (let i = 0; i < rows.length; i++) {
+        let clientName = rows[i].cells[0].innerText.toLowerCase();
+        if (clientName.indexOf(searchValue) > -1) {
+          rows[i].style.display = "";
+        } else {
+          rows[i].style.display = "none";
+        }
+      }
+    }
+
+    // Load bookings when the page loads
+    window.onload = loadBookings;
+  </script>
+</body>
+</html>

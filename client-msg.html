@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Client Messages</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #4CAF50;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .back-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .back-btn:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f4f4f4;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
+
+    td {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    tr:hover td {
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 20px;
+      }
+
+      th, td {
+        font-size: 0.9rem;
+        padding: 12px;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <a href="secret-dashboard.html" class="back-btn">← Back to Dashboard</a>
+    <h2>Client Messages</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Message</th>
+        </tr>
+      </thead>
+      <tbody id="messagesTableBody">
+        <!-- Dynamic data goes here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+     fetch("/get-messages")
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById("messagesTableBody");
+        data.forEach(msg => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${msg.name}</td>
+            <td>${msg.phone}</td>
+            <td>${msg.email}</td>
+            <td>${msg.message}</td>`;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(err => alert("Failed to load messages"));
+  </script>
+
+</body>
+</html>

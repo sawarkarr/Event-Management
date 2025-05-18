@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #EDEDE9; /* Light Grayish */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .success-box {
+            background: #D6CCC2; /* Muted Beige */
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+
+        .success-box h2 {
+            color: #5A4A42; /* Darker text for contrast */
+            margin-bottom: 1rem;
+        }
+
+        .success-box p {
+            color: #5A4A42; /* Darker text */
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="success-box">
+        <h2>🎉 Registration Successful!</h2>
+        <img src="Submitted.gif" alt="Submitted.gif" style="width: 100px; border-radius: 50%; margin-top: 20px;"> <br>
+        <p id="userData"></p>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Extract user data from parameters
+        const name = urlParams.get("name");
+        const email = urlParams.get("email");
+        const phone = urlParams.get("phone");
+        const service = urlParams.get("service");
+
+        // Display the user data
+        const userData = `
+            <strong>Name:</strong> ${name} <br>
+            <strong>Email:</strong> ${email} <br>
+            <strong>Phone:</strong> ${phone} <br>
+            <strong>Service:</strong> ${service}
+        `;
+        document.getElementById("userData").innerHTML = userData;
+    </script>
+
+</body>
+</html>

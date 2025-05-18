@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Starlight Event Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <a href="index.html" class="back-btn">← Back</a>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #fffdf9;
+      color: #333;
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+
+    .back-btn {
+    position: fixed;  /* Use fixed positioning to ensure it stays at the top of the page */
+    top: 10px;  /* Distance from the top */
+    left: 10px; /* Distance from the left */
+    font-size: 15px;  /* Font size */
+    color: #272424;  /* Text color */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px;  /* Add padding for better clickability */
+    background-color: #eff2f5;  /* Background color */
+    border-radius: 5px;  /* Rounded corners */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);  /* Shadow for depth */
+    z-index: 1000;  /* Ensure it appears above other elements */
+}
+
+.back-btn:hover {
+    background-color: #d0d8e0;  /* Darker shade on hover */
+    color: #fff;  /* Keep text white on hover */
+}
+
+
+.about-hero {
+    background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
+    url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Full viewport height for main image */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+    .about-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5em;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      font-size: 1.3em;
+      font-style: italic;
+      max-width: 750px;
+      margin: auto;
+    }
+
+    .about-section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .about-section p {
+      margin-bottom: 20px;
+      font-size: 1.1em;
+    }
+
+    .section-img-left, .section-img-right {
+      display: flex;
+      align-items: center;
+      margin: 40px 0;
+    }
+
+    .section-img-left img, .section-img-right img {
+      width: 45%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .section-img-left p, .section-img-right p,
+    .section-img-left div, .section-img-right div {
+      width: 55%;
+      padding: 0 20px;
+    }
+
+    .section-img-left {
+      flex-direction: row;
+    }
+
+    .section-img-right {
+      flex-direction: row-reverse;
+    }
+
+    .highlight-box {
+      background-color: #fff0f0;
+      padding: 25px;
+      border-left: 6px solid #b22222;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 1.05em;
+      list-style-type: disc;
+    }
+
+    @media (max-width: 768px) {
+      .about-content h1 {
+        font-size: 2.3em;
+      }
+
+      .about-content p {
+        font-size: 1em;
+      }
+
+      .section-img-left, .section-img-right {
+        flex-direction: column !important;
+      }
+
+      .section-img-left img, .section-img-right img,
+      .section-img-left p, .section-img-right p,
+      .section-img-left div, .section-img-right div {
+        width: 100%;
+        padding: 10px 0;
+      }
+    }
+
+ /*--------------------------- Compact Footer Section -------------*/
+footer {
+    padding: 1.5rem 2%;
+    background: url('https://www.suitcasediaries.in/wp-content/uploads/2020/05/event1.jpg') no-repeat center center/cover;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    min-height: 4vh;
+    z-index: 1;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+#contact, .container {
+    position: relative;
+    z-index: 2;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    text-align: center;
+}
+
+.f-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.f-container h2 {
+    font-size: 1.8rem;
+    color: #fff;
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.f-container p,
+.f-container a,
+.footer-content,
+.copyright {
+    font-size: 1.2rem;
+    color: #eee;
+    line-height: 1.4;
+}
+
+.f-container a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.f-container a:hover {
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn {
+    background: linear-gradient(135deg, #ff7e5f, #ff6030);
+    color: #fff;
+    padding: 0.6rem 1.8rem;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    border: none;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #fff;
+    color: #ff6030;
+    box-shadow: 0 0 10px rgba(255, 96, 48, 0.5);
+}
+
+.f-container input {
+    width: 90%;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+.f-container input::placeholder {
+    color: #ddd;
+}
+
+.social i {
+    font-size: 1.5rem;
+    padding: 0.6rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transition: 0.3s;
+}
+
+.social i:hover {
+    background: #ef8f72;
+    transform: scale(1.05);
+}
+
+.copyright {
+    text-align: center;
+    padding: 0.4rem 0;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+    .f-container h2 { font-size: 1.6rem; }
+    .f-container p,
+    .f-container a,
+    .footer-content,
+    .copyright {
+        font-size: 1rem;
+    }
+    .btn {
+        font-size: 1rem;
+        padding: 0.5rem 1.5rem;
+    }
+    .f-container input {
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Hero Banner -->
+  <section class="about-hero" data-aos="fade-up">
+    <div class="about-content">
+      <h1>About Starlight Event Planner</h1>
+      <p>From concept to celebration, Maharashtra's trusted event management company delivers magical experiences tailored to your unique vision.</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <div class="about-section">
+    <div class="highlight-box" data-aos="fade-up">
+      <p>Welcome to <strong>Starlight Event Planner</strong>, Maharashtra’s trusted name in wedding and event management. With a passion for creating unforgettable experiences, we specialize in planning elegant weddings, beautiful destination events, and memorable celebrations across the state.</p>
+    </div>
+
+    <div class="section-img-left" data-aos="fade-right">
+      <img src="https://www.weddingsutra.com/images/copper-events-thumb-700x452.jpg?%3E" alt="Wedding Decor">
+      <p>From the smallest details to the grandest moments, our team ensures every event reflects your unique vision. We combine creativity, culture, and flawless execution to craft moments that last a lifetime.</p>
+    </div>
+
+    <div class="section-img-right" data-aos="fade-left">
+      <img src="https://www.oyorooms.com/blog/wp-content/uploads/2018/02/fe.jpg" alt="Outdoor Wedding">
+      <p>Since our journey began, we've successfully planned numerous weddings, private parties, and corporate gatherings across <strong>Nagpur, Pune, Mumbai</strong>, and beyond. We take pride in offering personalized services tailored to each couple or client, ensuring every event feels truly special.</p>
+    </div>
+
+    <div class="section-img-left" data-aos="fade-right">
+      <img src="https://www.partyone.in/img/category_landing/artists/balloon_decor.webp" alt="Vision">
+      <p><strong>Our Vision:</strong> To become Maharashtra’s most loved and creative event management brand by designing stunning, joy-filled events rooted in tradition, yet elevated with modern flair.</p>
+    </div>
+
+    <!-- Our Mission Section -->
+    <div class="section-img-right" data-aos="fade-left">
+      <img src="https://jandevents.com/wp-content/uploads/jand-party.jpg" alt="Mission">
+      <div>
+        <h2 style="color: #a70000; font-size: 1.6em; font-family: 'Playfair Display', serif; margin-bottom: 15px;">Our Mission</h2>
+        <ul style="padding-left: 20px; font-size: 1.05em; line-height: 1.6;">
+          <li>Design visually stunning, joy-filled events</li>
+          <li>Deliver stress-free planning journeys</li>
+          <li>Celebrate stories with elegance and emotion</li>
+          <li>Bring destination wedding charm to your hometown</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Why Choose Starlight Section -->
+    <div class="section-img-left" data-aos="fade-right">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl0YEz9Rwg8ope63xnOlllU3cBakxd_BsWNA&s" alt="Why Choose Us">
+      <div>
+        <h2 style="color: #a70000; font-size: 1.6em; font-family: 'Playfair Display', serif; margin-bottom: 15px;">Why Choose Starlight?</h2>
+        <ul style="padding-left: 20px; font-size: 1.05em; line-height: 1.6;">
+          <li>Personalized and attentive planning</li>
+          <li>Clear, transparent process from start to finish</li>
+          <li>Expertise in local and destination weddings</li>
+          <li>Stylish concepts, premium décor & designs</li>
+          <li>Complete end-to-end event solutions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-img-right" data-aos="fade-left">
+      <img src="https://cdn.pixabay.com/photo/2025/02/20/09/57/top-event-management-9419524_1280.jpg" alt="Service Area">
+      <p>We proudly serve couples across <strong>Nagpur, Pune, Mumbai, Aurangabad</strong> — and we’re always excited to plan destination weddings wherever your heart desires.</p>
+    </div>
+  </div>
+
+  <!-- AOS Animation Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+
+</body>
+</html>
+ <!--------------------------------------------footer section--------------------------->
+ <footer id="contact">
+  <div class="container">
+      <div class="f-container">
+          <h2>Starlight Eventz - Your Personal Wedding Planner</h2><br>
+          <p>Plan your wedding with Us Starlight Eventz is an Indian Wedding Planning Website</p>
+          <div>
+              <a href="contact-us.html" class="btn">Get In Touch With Us</a>
+          </div>
+          <div class="social">
+              <i class="fab fa-facebook"></i>
+              <i class="fab fa-instagram"></i>
+              <i class="fab fa-linkedin"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-pinterest"></i>
+          </div>
+      </div>
+      <div class="f-container">
+          <h2>Our Location</h2>
+          <a>Pune</a>
+          <a >Vadodara</a>
+          <a >Mumbai</a>
+          <a >Ahemdabad</a>
+          <a >Surat</a>
+      </div>
+
+      <div class="f-container">
+          <h2>Our Newsletter</h2>
+          <p>Subscribe for latest updates</p>
+          <input type="text" id="email" placeholder="Enter Your Email">
+          <button class="btn" onclick="showMessage()">Subscribe</button>
+          <p id="successMessage" style="color: rgb(255, 255, 255); display: none; margin-top: 10px;">🎉 Subscribed Successfully!</p>
+      </div>
+
+      <script>
+          function showMessage() {
+              var email = document.getElementById("email").value.trim();
+              var message = document.getElementById("successMessage");
+
+              if (email === "") {
+                  alert("Please enter a valid email address.");
+                  message.style.display = "none";
+              } else {
+                  message.style.display = "block";
+              }
+          }
+      </script>
+
+  </div>
+</footer>
+
+<div class="copyright">
+  <p>Copyright ©2025 All Rights Reserved | Knowledge Starlight Event Management &nbsp;
+      <i class="fab fa-canadian-maple-leaf"></i>
+  </p>
+</div>
+
+<script>
+  let menu = document.querySelector('#menu-bar');
+  let head = document.querySelector('.head .navbar');
+
+  menu.onclick = () => {
+      head.classList.toggle('active');
+  };
+
+  window.onscroll = () => {
+      head.classList.remove('active');
+      if (window.scrollY > 60) {
+          document.querySelector('#menu-bar').classList.add('active');
+      } else {
+          document.querySelector('#menu-bar').classList.remove('active');
+      }
+  };
+  
+</script>

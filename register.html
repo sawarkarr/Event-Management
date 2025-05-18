@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Registration - Starlight Eventz</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #EDEDE9; /* Light Grayish */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Register Form Container */
+        .register-box {
+            background: #D6CCC2; /* Muted Beige */
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: left;
+        }
+
+        /* Form Heading */
+        .register-box h2 {
+            color: #5A4A42; /* Darker text for contrast */
+            margin-bottom: 1.5rem;
+        }
+
+        /* Input Fields */
+        .register-box input, .register-box select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #E3D5CA; /* Light Brown */
+            border-radius: 5px;
+            font-size: 1rem;
+            background: #F5EBE0; /* Soft Cream */
+            color: #5A4A42; /* Darker text */
+        }
+
+        /* Register Button */
+        .btn {
+            background: #D5BDAF; /* Warm Neutral */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #C9A897; /* Slightly darker on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <section class="register">
+        <div class="register-box">
+            <h2>Vendor Registration</h2>
+            <form id="registrationForm">
+                <div class="input-box">
+                    <label for="vendor-name" style="color:#5A4A42;">Name</label>
+                    <input type="text" id="vendor-name" name="vendor_name" placeholder="Enter your Name" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="email" style="color:#5A4A42;">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="phone" style="color:#5A4A42;">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="service" style="color:#5A4A42;">Type of Service</label>
+                    <select id="service" name="service" required>
+                        <option value="">Select Service</option>
+                        <option value="Wedding Venue">Wedding Venue</option>
+                        <option value="Makeup Artist">Makeup Artist</option>
+                        <option value="Photography">Photography</option>
+                        <option value="Catering">Catering</option>
+                        <option value="Music Band">Music Band</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Register as Vendor</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get the form data
+            const name = document.getElementById("vendor-name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const service = document.getElementById("service").value;
+
+            // Redirect to the success page with form data as URL parameters
+            window.location.href = `success.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&service=${encodeURIComponent(service)}`;
+        });
+    </script>
+
+</body>
+</html>

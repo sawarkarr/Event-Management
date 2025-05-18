@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <a href="index.html" class="back-btn">← Back</a>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        
+        .contact-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
+                url('https://eventsmanagementkerala.com/wp-content/uploads/2023/05/beautiful-photozone-with-big-wreath-decorated-with-greenery-roses-centerpiece-candles-sides-garland-hanged-trees.webp');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+        }
+        .back-btn {
+    position: absolute;
+    top: 20px;  /* Adjust the top margin as needed */
+    left: 20px; /* Adjust the left margin as needed */
+    font-size: 16px;  /* Font size */
+    color: #333;  /* Text color */
+    text-decoration: none; /* Remove underline */
+    padding: 8px 16px;  /* Add padding for spacing */
+    background-color: #f1f1f1;  /* Background color */
+    border-radius: 5px;  /* Rounded corners */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);  /* Add shadow for depth */
+    transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transition on hover */
+}
+
+.back-btn:hover {
+    background-color: #ddd;  /* Change background color on hover */
+    color: #000;  /* Change text color on hover */
+}
+
+
+        .contact-section h1 {
+            font-size: 4rem;
+            font-weight: 700;
+        }
+        .contact-section p {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+        .contact-container {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .contact-info, .contact-form {
+            width: 45%;
+        }
+        .contact-info p, .contact-info a {
+            font-size: 1.2rem;
+            color: white;
+            margin: 10px 0;
+            text-decoration: none;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .contact-form button {
+            background: purple;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .success-message {
+            display: none;
+            color: rgb(255, 255, 255);
+            font-size: 0.5rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 250;
+            margin-top: 9px;
+            line-height: 1;
+            text-align: center;
+            letter-spacing: 0.1px;
+        }
+    </style>
+</head>
+<body>
+    <section class="contact-section">
+        <h1>Contact Us</h1>
+        <p>Need help planning your next event? Look no further than our event management services!</p>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p><strong>Talk to our client support team:</strong></p>
+                <p>+91-848-495-5244</p>
+                <p><strong>Email us:</strong></p>
+                <p>Starlighteventmanagement@gmail.com</p>
+                <p>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </p>
+            </div>
+            <div class="contact-form">
+                <form id="registerForm">
+                    <input type="text" id="name" placeholder="Enter your Full Name" required>
+                    <input type="text" id="phone" placeholder="Enter your Phone Number" required>
+                    <input type="email" id="email" placeholder="Enter your Email ID" required>
+                    <textarea id="message" placeholder="Message" rows="4" required></textarea>
+                    <button type="submit">Submit</button>
+                    <p id="successMessage" class="success-message">Thank you for reaching out to us. We have received your message and will get back to you shortly.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(e) {
+            e.preventDefault(); // Prevent form reload
+
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+
+            fetch("http://localhost:3000/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, phone, email, message })
+            })
+            .then(res => res.text())
+            .then(response => {
+                // Show success message
+                const successMessage = document.getElementById("successMessage");
+                successMessage.innerText = "Thank you for reaching out to us. We have received your message and will get back to you shortly.";
+                successMessage.style.display = "block";
+
+                // Clear inputs for new submission
+                document.getElementById("name").value = "";
+                document.getElementById("phone").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("message").value = "";
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 5000);
+            })
+            .catch(error => {
+                alert("There was an error: " + error);
+                console.error(error);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Analytics - Starlight</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
+      margin: 0;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #3a3a72, #d76d77, #ffaf7b);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    .stats-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .stat {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      flex: 1 1 200px;
+      text-align: center;
+    }
+
+    .stat h2 {
+      color: #3a3a72;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .stat p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .chart-container {
+      margin-top: 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding: 10px;
+      background-color: #eee;
+      text-align: center;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Website Analytics Dashboard</h1>
+    <p>Insights on visitor behavior and site usage</p>
+  </div>
+
+  <div class="container">
+    <div class="stats-box">
+      <div class="stat">
+        <h2>Total Visits</h2>
+        <p>1,247</p>
+      </div>
+      <div class="stat">
+        <h2>Popular Page</h2>
+        <p>Gallery</p>
+      </div>
+      <div class="stat">
+        <h2>Most Active Day</h2>
+        <p>Saturday</p>
+      </div>
+      <div class="stat">
+        <h2>Mobile Users</h2>
+        <p>64%</p>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <h2>Weekly Visit Chart</h2>
+      <canvas id="visitChart" width="400" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Starlight Event Management. All rights reserved.
+  </div>
+
+  <script>
+    const ctx = document.getElementById('visitChart').getContext('2d');
+    const visitChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Website Visits',
+          data: [120, 190, 300, 250, 310, 420, 380],
+          fill: false,
+          borderColor: '#3a3a72',
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

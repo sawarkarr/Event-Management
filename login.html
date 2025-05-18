@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Starlight Eventz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #5b3032, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 380px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 24px;
+        }
+        .toggle-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .toggle-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            border-radius: 10px;
+        }
+        .toggle-buttons button.active {
+            background: rgba(255, 255, 255, 0.6);
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: white;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            outline: none;
+        }
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .login-btn:hover {
+            background: rgba(255, 255, 255, 0.6);
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <div class="toggle-buttons">
+            <button id="vendorBtn" class="active" onclick="showForm('vendor')">Vendor</button>
+            <button id="userBtn" onclick="showForm('user')">User</button>
+        </div>
+        
+        <form id="vendorForm" onsubmit="return login('vendor')">
+            <div class="form-group">
+                <label for="vendor-email">Vendor Email</label>
+                <input type="email" id="vendor-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="vendor-password">Password</label>
+                <input type="password" id="vendor-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="login-btn">Login as Vendor</button>
+        </form>
+
+        <form id="userForm" style="display: none;" onsubmit="return login('user')">
+            <div class="form-group">
+                <label for="user-email">User Email</label>
+                <input type="email" id="user-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="user-password">Password</label>
+                <input type="password" id="user-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="login-btn">Login as User</button>
+        </form>
+    </div>
+
+    <script>
+        function showForm(type) {
+            document.getElementById('vendorForm').style.display = type === 'vendor' ? 'block' : 'none';
+            document.getElementById('userForm').style.display = type === 'user' ? 'block' : 'none';
+            document.getElementById('vendorBtn').classList.toggle('active', type === 'vendor');
+            document.getElementById('userBtn').classList.toggle('active', type === 'user');
+        }
+
+        function login(type) {
+            const email = document.getElementById(`${type}-email`).value;
+            const password = document.getElementById(`${type}-password`).value;
+            const storedUser = localStorage.getItem(email);
+
+            if (!storedUser) {
+                alert("User not found. Please register first.");
+                return false;
+            }
+
+            const userData = JSON.parse(storedUser);
+            if (userData.password !== password || userData.role !== type) {
+                alert("Invalid credentials!");
+                return false;
+            }
+
+            alert("Login successful! Redirecting...");
+            window.location.href = type === 'vendor' ? "vendordashboard.html" : "userdashboard.html";
+            return false;
+        }
+    </script>
+</body>
+</html>

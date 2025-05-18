@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery Of Starlight Event Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <a href="index.html" class="back-btn">← Back</a>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: #f8f9fa;
+            text-align: center;
+        }
+        .banner {
+    background: url('https://www.alfaazphotography.com/wp-content/uploads/2022/09/HARD-ROCK-WEDDINGS-0102.jpg') 
+                no-repeat center center/cover;
+    height: 70vh; /* Increased height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    font-size: 2.5rem; /* Slightly increased font size */
+    font-weight: bold;
+    padding: 2rem; /* Added padding for better spacing */
+    text-align: center;
+}
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .back-btn {
+    position: absolute;
+    top: 20px;  /* Adjust the top margin as needed */
+    left: 20px; /* Adjust the left margin as needed */
+    font-size: 16px;  /* Font size */
+    color: #333;  /* Text color */
+    text-decoration: none; /* Remove underline */
+    padding: 8px 16px;  /* Add padding for spacing */
+    background-color: #f1f1f1;  /* Background color */
+    border-radius: 5px;  /* Rounded corners */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);  /* Add shadow for depth */
+    transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transition on hover */
+}
+
+.back-btn:hover {
+    background-color: #ddd;  /* Change background color on hover */
+    color: #000;  /* Change text color on hover */
+}
+ /*--------------------------- Compact Footer Section -------------*/
+ footer {
+    padding: 1.5rem 2%;
+    background: url('https://www.suitcasediaries.in/wp-content/uploads/2020/05/event1.jpg') no-repeat center center/cover;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    min-height: 4vh;
+    z-index: 1;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+#contact, .container {
+    position: relative;
+    z-index: 2;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    text-align: center;
+}
+
+.f-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.f-container h2 {
+    font-size: 1.8rem;
+    color: #fff;
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.f-container p,
+.f-container a,
+.footer-content,
+.copyright {
+    font-size: 1.2rem;
+    color: #eee;
+    line-height: 1.4;
+}
+
+.f-container a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.f-container a:hover {
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn {
+    background: linear-gradient(135deg, #ff7e5f, #ff6030);
+    color: #fff;
+    padding: 0.6rem 1.8rem;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    border: none;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #fff;
+    color: #ff6030;
+    box-shadow: 0 0 10px rgba(255, 96, 48, 0.5);
+}
+
+.f-container input {
+    width: 90%;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+.f-container input::placeholder {
+    color: #ddd;
+}
+
+.social i {
+    font-size: 1.5rem;
+    padding: 0.6rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transition: 0.3s;
+}
+
+.social i:hover {
+    background: #ef8f72;
+    transform: scale(1.05);
+}
+
+.copyright {
+    text-align: center;
+    padding: 0.4rem 0;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+    .f-container h2 { font-size: 1.6rem; }
+    .f-container p,
+    .f-container a,
+    .footer-content,
+    .copyright {
+        font-size: 1rem;
+    }
+    .btn {
+        font-size: 1rem;
+        padding: 0.5rem 1.5rem;
+    }
+    .f-container input {
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="banner">Photo Gallery Of Starlight Event Management</div>
+    <div class="gallery-container">
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.41.17-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.48.05-PM-1.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.48.05-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.eternalweddingz.in/storage/Image/Oo7E0owXT68xaf3AiOj3QW1XCanXIqflNR16n08O.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://cdn0.hitched.co.uk/vendor/9529/3_2/960/jpg/ss-221-1_4_189529-168805226888285.jpeg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://image.wedmegood.com/resized-nw/800X400/wp-content/uploads/2022/06/WMG-Blogs-1.png" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.48.06-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.48.06-PM-1.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.48.07-PM-1.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://shaadiwish.com/blog/wp-content/uploads/2020/05/Untitled-design-2020-05-14T143050.989.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.india-tours.com/blog/wp-content/uploads/2020/07/destination-weddings-in-india1.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.varmalla.com/wp-content/uploads/2024/02/hindu-wedding-mandap-athens-greece-1-65bdc8ccafcea.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://mediaindia.eu/wp-content/uploads/2017/05/Alibaug-is-famous-for-its-themed-destination-weddings.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://images.squarespace-cdn.com/content/v1/52ed3507e4b041396187d22b/1630387925904-70PPK4TV0OTQGELVWABD/Radisson+Blu+Resort+%26+Spa+Alibaug+Destination+Wedding+118.jpeg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.dpolohotels.com/wp-content/uploads/2024/04/Memories.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://images.shaadisaga.com/shaadisaga_production/photos/pictures/000/509/529/new_medium/Atul_Pratap_Chauhan_81.jpg?1536326727" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2022/01/28140058/shutterstock_631852175.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://image.wedmegood.com/nw/uploads/real_wedding/159/1432711511_60_170.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7b_I1360K3hAMCKUWaQwB0bYtUYzx4_NQgyxSkqtqiKsM4T6COY-lo30Ir4iZ0lyeTtc&usqp=CAU" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaEPMznCEjbTD1XcTMCvasMLvPpJJGZ-2WsLvxHtv2H_qKJlaIB98gTkuMXWKh0NEwqdE&usqp=CAU" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://static.toiimg.com/thumb/imgsize-23456,msid-112831471,width-600,resizemode-4/112831471.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.53.32-PM-1.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://cdn0.weddingwire.in/article/2315/3_2/1280/jpg/115132-cover-image-thecheesecakeproject-.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://weddingsbyneerajkamra.com/uploads/BlogPicturesdestination-wedding-planner-in-rajasthan-royal-splendor-awaits/default/Royal-Wedding-in-Rajasthan.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.53.33-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://assets.vogue.in/photos/678a5baab361a6d88a5c3dbe/16:9/w_1280,c_limit/Ceremon2NoWatermark.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.shaadidukaan.com/vogue/wp-content/uploads/2024/05/A-Guide-To-Plan-A-Beach-Destination-Wedding.png" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.bogmallobeachresort.com/wp-content/themes/resort/images/wedslide6.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://cdn0.weddingwire.in/vendor/2881/3_2/960/jpg/dsc02503_15_402881-171645872767686.jpeg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.kumarakomlakeresort.in/assets/images/image-sliders/events-weddings-slider/events-weddings-slider-7.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2023/07/family-table.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2023/07/outdoor-wedding-venues-in-Thrissur.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.41.15-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.41.14-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.48.09-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.41.12-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.48.09-PM-1.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.41.10-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://shaadiwish.com/blog/wp-content/uploads/2020/05/Untitled-design-2020-05-14T143050.989.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.india-tours.com/blog/wp-content/uploads/2020/07/destination-weddings-in-india1.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.varmalla.com/wp-content/uploads/2024/02/hindu-wedding-mandap-athens-greece-1-65bdc8ccafcea.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://mediaindia.eu/wp-content/uploads/2017/05/Alibaug-is-famous-for-its-themed-destination-weddings.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://images.squarespace-cdn.com/content/v1/52ed3507e4b041396187d22b/1630387925904-70PPK4TV0OTQGELVWABD/Radisson+Blu+Resort+%26+Spa+Alibaug+Destination+Wedding+118.jpeg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.dpolohotels.com/wp-content/uploads/2024/04/Memories.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://images.shaadisaga.com/shaadisaga_production/photos/pictures/000/509/529/new_medium/Atul_Pratap_Chauhan_81.jpg?1536326727" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2022/01/28140058/shutterstock_631852175.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://image.wedmegood.com/nw/uploads/real_wedding/159/1432711511_60_170.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7b_I1360K3hAMCKUWaQwB0bYtUYzx4_NQgyxSkqtqiKsM4T6COY-lo30Ir4iZ0lyeTtc&usqp=CAU" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaEPMznCEjbTD1XcTMCvasMLvPpJJGZ-2WsLvxHtv2H_qKJlaIB98gTkuMXWKh0NEwqdE&usqp=CAU" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://static.toiimg.com/thumb/imgsize-23456,msid-112831471,width-600,resizemode-4/112831471.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.53.32-PM-1.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://cdn0.weddingwire.in/article/2315/3_2/1280/jpg/115132-cover-image-thecheesecakeproject-.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://weddingsbyneerajkamra.com/uploads/BlogPicturesdestination-wedding-planner-in-rajasthan-royal-splendor-awaits/default/Royal-Wedding-in-Rajasthan.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.53.33-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://assets.vogue.in/photos/678a5baab361a6d88a5c3dbe/16:9/w_1280,c_limit/Ceremon2NoWatermark.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.shaadidukaan.com/vogue/wp-content/uploads/2024/05/A-Guide-To-Plan-A-Beach-Destination-Wedding.png" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.bogmallobeachresort.com/wp-content/themes/resort/images/wedslide6.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://cdn0.weddingwire.in/vendor/2881/3_2/960/jpg/dsc02503_15_402881-171645872767686.jpeg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.kumarakomlakeresort.in/assets/images/image-sliders/events-weddings-slider/events-weddings-slider-7.jpg" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2023/07/family-table.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-08-26-at-7.48.07-PM.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://eventsmanagementkerala.com/wp-content/uploads/2023/08/kerala-haldi-stage-decoration-weddings.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://www.bogmallobeachresort.com/wp-content/themes/resort/images/wedslide6.webp" alt="Wedding Image"></div>
+        <div class="gallery-item"><img src="https://cdn0.weddingwire.in/vendor/2881/3_2/960/jpg/dsc02503_15_402881-171645872767686.jpeg" alt="Wedding Image"></div>
+    </div>
+</body>
+</html>
+ <!--------------------------------------------footer section--------------------------->
+ <footer id="contact">
+    <div class="container">
+        <div class="f-container">
+            <h2>Starlight Eventz - Your Personal Wedding Planner</h2><br>
+            <p>Plan your wedding with Us Starlight Eventz is an Indian Wedding Planning Website</p>
+            <div>
+                <a href="contact-us.html" class="btn">Get In Touch With Us</a>
+            </div>
+            <div class="social">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-linkedin"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-pinterest"></i>
+            </div>
+        </div>
+        <div class="f-container">
+            <h2>Our Location</h2>
+            <a>Pune</a>
+            <a >Vadodara</a>
+            <a >Mumbai</a>
+            <a >Ahemdabad</a>
+            <a >Surat</a>
+        </div>
+  
+        <div class="f-container">
+            <h2>Our Newsletter</h2>
+            <p>Subscribe for latest updates</p>
+            <input type="text" id="email" placeholder="Enter Your Email">
+            <button class="btn" onclick="showMessage()">Subscribe</button>
+            <p id="successMessage" style="color: rgb(255, 255, 255); display: none; margin-top: 10px;">🎉 Subscribed Successfully!</p>
+        </div>
+  
+        <script>
+            function showMessage() {
+                var email = document.getElementById("email").value.trim();
+                var message = document.getElementById("successMessage");
+  
+                if (email === "") {
+                    alert("Please enter a valid email address.");
+                    message.style.display = "none";
+                } else {
+                    message.style.display = "block";
+                }
+            }
+        </script>
+  
+    </div>
+  </footer>
+  
+  <div class="copyright">
+    <p>Copyright ©2025 All Rights Reserved | Knowledge Starlight Event Management &nbsp;
+        <i class="fab fa-canadian-maple-leaf"></i>
+    </p>
+  </div>
+  
+  <script>
+    let menu = document.querySelector('#menu-bar');
+    let head = document.querySelector('.head .navbar');
+  
+    menu.onclick = () => {
+        head.classList.toggle('active');
+    };
+  
+    window.onscroll = () => {
+        head.classList.remove('active');
+        if (window.scrollY > 60) {
+            document.querySelector('#menu-bar').classList.add('active');
+        } else {
+            document.querySelector('#menu-bar').classList.remove('active');
+        }
+    };
+    
+  </script>
+  

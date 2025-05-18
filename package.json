@@ -1,0 +1,24 @@
+{
+  "name": "event-planner-main",
+  "version": "1.0.0",
+  "description": "Banquet Hall Booking System is a Window based project which acts as a bridge between potential Banquet users and Banquet owners. Banquet booking system provides complete listing of banquets in different districts, where each district is further having different sectors, which may comprise of around 100 families.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
